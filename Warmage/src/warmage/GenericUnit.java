@@ -1,9 +1,12 @@
 package warmage;
 
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -13,15 +16,20 @@ public class GenericUnit extends JButton implements MouseListener {
 	protected ImageIcon unitIcon, unitHL;
 	protected int positionIndex, unitType;
 	protected String unitName, playerName;
-	protected int hitPoints, attack, defense, mana, damage, speed, vision;
-
+	protected int hitPoints, attack, defense, mana, damage, speed, vision, intelligenceAtt, pierceAtt, pierceDam, intelligenceDef, soulAffinity,
+	hoardingAptitude, healthRegeneration, calmingAura, disillusionment, holy, dark, spellStrength, affinity, bravery, earthResist, 
+	constructionGrade, heatThreshold, liquidThreshold, nullification, strength, agility, stability, padding, shell, reinforcement, health, 
+	magicPoints, numberOfAttacks, sightRadius, movementSpeed, productionCost, range, squaresOccupied;
+	protected JButton moveButton = new JButton("Move");
 	public GenericUnit(GenericUnit toCopy) {
 		super();
 		addMouseListener(this);
+		
 		positionIndex = toCopy.getPositionIndex();
 		unitName = toCopy.getUnitName();
 		unitIcon = toCopy.getUnitIcon();
 		unitHL = toCopy.getUnitHL();
+		moveButton = toCopy.getMoveButton();
 		setIcon(unitIcon);
 		setMargin(new Insets(-2, -2, -2, -2));
 		setContentAreaFilled(false);
@@ -37,6 +45,7 @@ public class GenericUnit extends JButton implements MouseListener {
 		unitIcon = new ImageIcon("images/" + unitName + pN + ".png");
 		unitHL = new ImageIcon("images/" + unitName + "HL" + pN + ".png");
 		setIcon(unitIcon);
+		setMoveButton();
 		setMargin(new Insets(-2, -2, -2, -2));
 		setContentAreaFilled(false);
 		setOpaque(false);
@@ -84,6 +93,10 @@ public class GenericUnit extends JButton implements MouseListener {
 
 	public int getVision() {
 		return vision;
+	}
+
+	public int getRange() {
+			return range;
 	}
 
 	@Override
@@ -162,5 +175,19 @@ public class GenericUnit extends JButton implements MouseListener {
 
 	protected void setUnitType() {
 		unitType = 0;
+	}
+
+	protected void setMoveButton() {
+		moveButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Do Nothing
+			}
+		});
+	}
+	
+	protected JButton getMoveButton() {
+		return moveButton;
 	}
 }

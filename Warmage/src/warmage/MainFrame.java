@@ -153,6 +153,9 @@ public class MainFrame extends JFrame {
 				+ sourceUnit.getDefense() + "<br>Mana: " + sourceUnit.getMana()
 				+ "<br>Damage: " + sourceUnit.getDamage() + "<br>Speed: "
 				+ sourceUnit.getSpeed() + "</html>");
+		
+		infoPane.remove(4);
+		infoPane.add(sourceUnit.getMoveButton(), 4);
 	}
 
 	public static void displayTerrainInformation(int pi) {
@@ -164,6 +167,10 @@ public class MainFrame extends JFrame {
 
 		((JLabel) infoPane.getComponent(3)).setText("<html>Terrain Name: "
 				+ sourceTerrain.getTerrainName() + "</html>");
+		
+		infoPane.remove(4);
+		JButton terrainDoNothingOne = new JButton("Do Nothing");
+		infoPane.add(terrainDoNothingOne, 4);
 	}
 
 	public static void generateHighlight(int pos, int spd) {
@@ -270,7 +277,7 @@ public class MainFrame extends JFrame {
 			for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 				temp = (GenericUnit) unitsPane.getComponent(i);
 				if (temp.getUnitType() > 0
-						&& !temp.getPlayerName().equals("Player 2")) {
+						&& !temp.getPlayerName().equals("Player2")) {
 					temp.setVisible(false);
 				} else if (temp.getUnitType() > 0) {
 					temp.setVisible(true);
@@ -283,7 +290,7 @@ public class MainFrame extends JFrame {
 			for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 				if (((GenericUnit) unitsPane.getComponent(i)).getUnitType() == 1
 						&& ((GenericUnit) unitsPane.getComponent(i))
-								.getPlayerName().equals("Player 2")) {
+								.getPlayerName().equals("Player2")) {
 					p2Start = i;
 					break;
 				}
@@ -292,7 +299,7 @@ public class MainFrame extends JFrame {
 			for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 				if (((GenericUnit) unitsPane.getComponent(i)).getUnitType() > 0
 						&& ((GenericUnit) unitsPane.getComponent(i))
-								.getPlayerName().equals("Player 2")) {
+								.getPlayerName().equals("Player2")) {
 					updateVision(i);
 				}
 			}
@@ -306,7 +313,7 @@ public class MainFrame extends JFrame {
 			for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 				temp = (GenericUnit) unitsPane.getComponent(i);
 				if (temp.getUnitType() > 0
-						&& !temp.getPlayerName().equals("Player 1")) {
+						&& !temp.getPlayerName().equals("Player1")) {
 					temp.setVisible(false);
 				} else if (temp.getUnitType() > 0) {
 					temp.setVisible(true);
@@ -319,7 +326,7 @@ public class MainFrame extends JFrame {
 			for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 				if (((GenericUnit) unitsPane.getComponent(i)).getUnitType() == 1
 						&& ((GenericUnit) unitsPane.getComponent(i))
-								.getPlayerName().equals("Player 1")) {
+								.getPlayerName().equals("Player1")) {
 					p1Start = i;
 					break;
 				}
@@ -328,7 +335,7 @@ public class MainFrame extends JFrame {
 			for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 				if (((GenericUnit) unitsPane.getComponent(i)).getUnitType() > 0
 						&& ((GenericUnit) unitsPane.getComponent(i))
-								.getPlayerName().equals("Player 1")) {
+								.getPlayerName().equals("Player1")) {
 					updateVision(i);
 				}
 			}
@@ -522,7 +529,7 @@ public class MainFrame extends JFrame {
 		for (int i = 0; i < unitsPane.getComponentCount(); i++) {
 			temp = (GenericUnit) unitsPane.getComponent(i);
 			if (temp.getUnitType() > 0
-					&& !temp.getPlayerName().equals("Player 1")) {
+					&& !temp.getPlayerName().equals("Player1")) {
 				temp.setVisible(false);
 			}
 		}
@@ -760,7 +767,48 @@ public class MainFrame extends JFrame {
 	private Anchor[][] generatePreSetMapOne() {
 
 		Anchor[][] abstractMap = new Anchor[144][144];
-
+		int tileType = 0;
+		
+		// Regions 0,0 to 3,3 of (1)
+		for (int i=15; i<112; i+=32)
+		{
+			for (int j=15; j<112; j+=32)
+			{
+				tileType = (int)(Math.random()*5);
+				abstractMap[i][j] = new Anchor (15, 1, tileType);
+				abstractMap[i][j+1] = new Anchor (15, 3, tileType);
+				abstractMap[i+1][j] = new Anchor (15, 7, tileType);
+				abstractMap[i+1][j+1] = new Anchor (15, 5, tileType);
+			}
+		}
+		
+		// Regions 0,0 to 7,0 of (2)
+		for (int i=7; i<120; i+=16)
+		{
+			if (i==7 || i==71)
+			{
+				tileType = (int)(Math.random()*5);
+			}
+			abstractMap[i][135] = new Anchor (7, 1, tileType);
+			abstractMap[i][136] = new Anchor (7, 3, tileType);
+			abstractMap[i+1][135] = new Anchor (7, 7, tileType);
+			abstractMap[i+1][136] = new Anchor (7, 5, tileType);
+		}
+		
+		//Regions 0,0 to 0,7 of (3) and 0,0 of (4)
+		for (int j=7; j<136; j+=16)
+		{
+			if (j==7 || j==135)
+			{
+				tileType = (int)(Math.random()*5);
+			}
+			abstractMap[135][j] = new Anchor (7, 1, tileType);
+			abstractMap[135][j+1] = new Anchor (7, 3, tileType);
+			abstractMap[136][j] = new Anchor (7, 7, tileType);
+			abstractMap[136][j+1] = new Anchor (7, 5, tileType);
+		}
+		
+		/*
 		// Region 0, 0 of (1)
 		int tileType = (int) (Math.random() * 5);
 
@@ -1010,7 +1058,7 @@ public class MainFrame extends JFrame {
 		abstractMap[135][135] = new Anchor(7, 1, tileType);
 		abstractMap[135][136] = new Anchor(7, 3, tileType);
 		abstractMap[136][135] = new Anchor(7, 7, tileType);
-		abstractMap[136][136] = new Anchor(7, 5, tileType);
+		abstractMap[136][136] = new Anchor(7, 5, tileType); */
 
 		boolean advance;
 
@@ -1100,12 +1148,18 @@ public class MainFrame extends JFrame {
 				* 144;
 		int p2Start = (int) (72 + Math.random() * 72)
 				+ (int) ((Math.random() * 72) + 72) * 144;
-		GenericUnit player1 = new NoviceMagician("Player 1", p1Start);
-		GenericUnit player2 = new NoviceMagician("Player 2", p2Start);
+		GenericUnit player1 = new NoviceMagician("Player1", p1Start);
+		GenericUnit player2 = new NoviceMagician("Player2", p2Start);
+		GenericUnit torak1 = new TorakEres("Player1", p1Start - 1);
+		GenericUnit torak2 = new TorakEres("Player2", p2Start - 1);
 		unitsPane.remove(p1Start);
 		unitsPane.add(player1, p1Start);
 		unitsPane.remove(p2Start);
 		unitsPane.add(player2, p2Start);
+		unitsPane.remove(p1Start - 1);
+		unitsPane.add(torak1, p1Start - 1);
+		unitsPane.remove(p2Start - 1);
+		unitsPane.add(torak2, p2Start - 1);
 		unitsPane.revalidate();
 		unitsPane.repaint();
 	}
@@ -1266,7 +1320,7 @@ public class MainFrame extends JFrame {
 					scrollLeft();
 				}
 
-				if (x < 1 && y > screenSize.height - 1) {
+				if (x < 1 && y < screenSize.height - 1) {
 					scrollSouthWest();
 				}
 

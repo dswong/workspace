@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class NoviceMagician extends GenericUnit {
+public class TorakEres extends GenericUnit {
 	
-	public NoviceMagician(String pN, int pi) {
+	public TorakEres(String pN, int pi) {
 		super(pi, pN);
 		playerName = pN;
 		hitPoints = 8;
@@ -20,38 +20,39 @@ public class NoviceMagician extends GenericUnit {
 		
 		intelligenceAtt = 4;
 		pierceAtt = 9;
-		pierceDam = 9;
-		intelligenceDef = 9;
-		soulAffinity = 8;
-		hoardingAptitude = 3;
-		healthRegeneration = 5;
-		calmingAura = 7;
-		disillusionment = 7;
-		holy = 5;
-		dark = 5;
-		spellStrength = 9;
-		affinity = 8;
-		bravery = 7;
-		earthResist = 6; 
-		constructionGrade = 6;
-		heatThreshold = 6;
-		liquidThreshold = 6;
-		nullification = 8;
-		strength = 4;
-		agility = 7; 
-		stability = 4;
+		pierceDam = 4;
+		intelligenceDef = 8;
+		soulAffinity = 5;
+		hoardingAptitude = 8;
+		healthRegeneration = 4;
+		calmingAura = 9;
+		disillusionment = 5;
+		holy = 9;
+		dark = 8;
+		spellStrength = 6;
+		affinity = 3;
+		bravery = 4;
+		earthResist = 7; 
+		constructionGrade = 7;
+		heatThreshold = 7;
+		liquidThreshold = 7;
+		nullification = 6;
+		strength = 6;
+		agility = 6; 
+		stability = 5;
 		padding = 6;
 		shell = 6;
 		reinforcement = 6; 
-		magicPoints = 12;
-		numberOfAttacks = 9; 
-		sightRadius = 9; 
-		movementSpeed = 9;
-		range = 9; 
+		magicPoints = 9;
+		numberOfAttacks = 3; 
+		sightRadius = 6; 
+		movementSpeed = 5;
+		productionCost = 4;
+		range = 1; 
 		squaresOccupied = 1;
 	}
 
-	public NoviceMagician(NoviceMagician toCopy) {
+	public TorakEres(TorakEres toCopy) {
 		super(toCopy.getPositionIndex(), toCopy.getPlayerName());
 		playerName = toCopy.getPlayerName();
 		hitPoints = toCopy.getHitPoints();
@@ -66,7 +67,7 @@ public class NoviceMagician extends GenericUnit {
 
 	@Override
 	protected void setUnitName() {
-		unitName = "WarMage";
+		unitName = "TorakEres";
 	}
 
 	@Override
